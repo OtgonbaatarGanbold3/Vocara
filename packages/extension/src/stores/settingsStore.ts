@@ -39,9 +39,9 @@ export const useSettingsStore = create<SettingsState>((set, get) => ({
   updateSettings: (updates) => {
     set(updates);
     // Persist to chrome.storage.sync
-    const state = get();
-    const { updateSettings: _, loadSettings: __, resetSettings: ___, ...toSave } = state;
-    chrome.storage.sync.set({ settings: { ...toSave, ...updates } });
+    const { nativeLanguage, targetLanguage, subtitleFontSize, subtitlePosition, subtitleOpacity, autoPlay, showTranslation, theme } = get();
+    const toSave = { nativeLanguage, targetLanguage, subtitleFontSize, subtitlePosition, subtitleOpacity, autoPlay, showTranslation, theme, ...updates };
+    chrome.storage.sync.set({ settings: toSave });
   },
 
   loadSettings: async () => {
