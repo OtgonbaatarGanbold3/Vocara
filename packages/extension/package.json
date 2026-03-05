@@ -1,5 +1,7 @@
 {
   "name": "@vocara/extension",
+  "type": "module",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
   "description": "Vocara Chrome Extension — language learning while watching movies",

@@ -13,10 +13,10 @@ interface Props {
   onClose: () => void;
 }
 
-type RecordingState = 'idle' | 'recording' | 'done';
+type RecordingStatus = 'idle' | 'recording' | 'done';
 
 const ShadowingMode: React.FC<Props> = ({ targetText, onClose }) => {
-  const [recordingState, setRecordingState] = useState<RecordingState>('idle');
+  const [recordingState, setRecordingState] = useState<RecordingStatus>('idle');
   const [recognizedText, setRecognizedText] = useState('');
   const [score, setScore] = useState<number | null>(null);
 
@@ -33,28 +33,21 @@ const ShadowingMode: React.FC<Props> = ({ targetText, onClose }) => {
 
   /** Start recording using the Web Speech Recognition API */
   const handleRecord = useCallback(() => {
-    // Check for browser support
-    const SpeechRecognition =
-      (window as unknown as { SpeechRecognition?: typeof window.SpeechRecognition })
-        .SpeechRecognition ??
-      (
-        window as unknown as {
-          webkitSpeechRecognition?: typeof window.SpeechRecognition;
-        }
-      ).webkitSpeechRecognition;
+    // Check for browser support (standard or webkit-prefixed)
+    const SpeechRecognitionCtor = window.SpeechRecognition ?? window.webkitSpeechRecognition;
 
-    if (!SpeechRecognition) {
+    if (!SpeechRecognitionCtor) {
       alert('Speech recognition is not supported in this browser.');
       return;
     }
 
-    const recognition = new SpeechRecognition();
+    const recognition = new SpeechRecognitionCtor();
     recognition.continuous = false;
     recognition.interimResults = false;
 
     recognition.onstart = () => setRecordingState('recording');
 
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setRecognizedText(transcript);
       setScore(calculateScore(transcript, targetText));

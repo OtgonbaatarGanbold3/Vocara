@@ -1,5 +1,6 @@
 {
-  "name": "vocara",
+  "name": "@vocara/extension",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
   "description": "Vocara monorepo — Chrome extension for language learning while watching movies",
