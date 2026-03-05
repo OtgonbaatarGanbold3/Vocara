@@ -1,0 +1,24 @@
+{
+  "name": "@vocara/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vocara Backend API — Vercel Serverless Functions",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "tsc --noEmit",
+    "lint": "eslint api lib --ext ts --report-unused-disable-directives --max-warnings 0",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.3",
+    "openai": "^4.28.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "vercel": "^33.4.1"
+  }
+}

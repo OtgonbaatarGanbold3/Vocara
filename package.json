@@ -1,0 +1,17 @@
+{
+  "name": "vocara",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vocara monorepo — Chrome extension for language learning while watching movies",
+  "scripts": {
+    "dev": "pnpm --filter @vocara/extension dev",
+    "build": "pnpm --filter @vocara/extension build && pnpm --filter @vocara/api build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  }
+}
